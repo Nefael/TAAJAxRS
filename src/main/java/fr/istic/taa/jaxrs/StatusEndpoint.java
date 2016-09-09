@@ -26,9 +26,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import fr.istic.taa.jaxrs.domain.Person;
+import fr.istic.taa.jaxrs.domain.Root;
 
-@Path("/status")
+@Path("/stw")
 public class StatusEndpoint {
 
     private static final Logger logger = Logger.getLogger(StatusEndpoint.class.getName());
@@ -42,25 +42,22 @@ public class StatusEndpoint {
     @GET
     @Path("/test")
     public String helloWorld() {
-
         return "hello";
     }
 
     @GET
-    @Path("/person")
+    @Path("/root")
     @Produces(MediaType.APPLICATION_JSON)
-    public Person getPerson() {
-    	Person p = new Person();
-    	p.setName("test");
-    	p.setFirstName("t");
-        return p;
-    }
-
-    @POST
-    @Path("/person")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addPerson(Person p) {
-    	System.err.println(p.getName());
+    public Root getRoot() {
+    	
+    	Root r = new Root();
+    	r.filmsUrl = APIConstants.BASE_URL+"/films";
+    	r.peopleUrl = APIConstants.BASE_URL+"/people";
+    	r.planetsUrl = APIConstants.BASE_URL+"/planets";
+    	r.speciesUrl = APIConstants.BASE_URL+"/species";
+    	r.starshipsUrl = APIConstants.BASE_URL+"/starships";
+    	r.vehiclesUrl = APIConstants.BASE_URL+"/vehicles";
+        return r;
     }
     
 
